@@ -39,27 +39,27 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MyApp() {
     var shouldShowOnboard by rememberSaveable { mutableStateOf(true) }
-    if (shouldShowOnboard)
-        OnboardScreen(onContinueClicked = { shouldShowOnboard = false })
-    else
-        Greetings()
+    Surface {
+        if (shouldShowOnboard)
+            OnboardScreen(onContinueClicked = { shouldShowOnboard = false })
+        else
+            Greetings()
+    }
 }
 
 @Composable
 fun OnboardScreen(onContinueClicked: () -> Unit) {
-    Surface {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text("Welcome to the Basics Codelab!")
+        Button(
+            modifier = Modifier.padding(vertical = 24.dp),
+            onClick = onContinueClicked
         ) {
-            Text("Welcome to the Basics Codelab!")
-            Button(
-                modifier = Modifier.padding(vertical = 24.dp),
-                onClick = onContinueClicked
-            ) {
-                Text("Continue")
-            }
+            Text("Continue")
         }
     }
 }
